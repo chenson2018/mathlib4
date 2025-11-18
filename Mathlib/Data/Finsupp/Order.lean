@@ -229,9 +229,9 @@ theorem support_sup [DecidableEq ι] (f g : ι →₀ α) : (f ⊔ g).support = 
   simp only [mem_support_iff, Ne, sup_apply, ← nonpos_iff_eq_zero, sup_le_iff, mem_union,
     not_and_or]
 
-nonrec theorem disjoint_iff {f g : ι →₀ α} : Disjoint f g ↔ Disjoint f.support g.support := by
+theorem disjoint_iff {f g : ι →₀ α} : Disjoint f g ↔ Disjoint f.support g.support := by
   classical
-    rw [disjoint_iff, disjoint_iff, Finsupp.bot_eq_zero, ← Finsupp.support_eq_empty,
+    rw [_root_.disjoint_iff, _root_.disjoint_iff, Finsupp.bot_eq_zero, ← Finsupp.support_eq_empty,
       Finsupp.support_inf]
     rfl
 

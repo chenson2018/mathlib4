@@ -117,11 +117,11 @@ theorem Valid'.left {s l x r o₁ o₂} (H : Valid' o₁ (@Ordnode.node α s l x
 theorem Valid'.right {s l x r o₁ o₂} (H : Valid' o₁ (@Ordnode.node α s l x r) o₂) : Valid' x r o₂ :=
   ⟨H.1.2, H.2.2.2, H.3.2.2⟩
 
-nonrec theorem Valid.left {s l x r} (H : Valid (@node α s l x r)) : Valid l :=
-  H.left.valid
+theorem Valid.left {s l x r} (H : Valid (@node α s l x r)) : Valid l :=
+  Ordnode.Valid'.valid <| Valid'.left H
 
-nonrec theorem Valid.right {s l x r} (H : Valid (@node α s l x r)) : Valid r :=
-  H.right.valid
+theorem Valid.right {s l x r} (H : Valid (@node α s l x r)) : Valid r :=
+  Ordnode.Valid'.valid <| Valid'.right H
 
 theorem Valid.size_eq {s l x r} (H : Valid (@node α s l x r)) :
     size (@node α s l x r) = size l + size r + 1 :=
@@ -651,8 +651,8 @@ open Ordnode
 variable [Preorder α]
 
 /-- O(1). The empty set. -/
-nonrec def nil : Ordset α :=
-  ⟨nil, ⟨⟩, ⟨⟩, ⟨⟩⟩
+def nil : Ordset α :=
+  ⟨Ordnode.nil, ⟨⟩, ⟨⟩, ⟨⟩⟩
 
 /-- O(1). Get the size of the set. -/
 def size (s : Ordset α) : ℕ :=
@@ -693,9 +693,9 @@ instance instInsert [IsTotal α (· ≤ ·)] [DecidableLE α] : Insert α (Ordse
 
 /-- O(log n). Insert an element into the set, preserving balance and the BST property.
   If an equivalent element is already in the set, the set is returned as is. -/
-nonrec def insert' [IsTotal α (· ≤ ·)] [DecidableLE α] (x : α) (s : Ordset α) :
+def insert' [IsTotal α (· ≤ ·)] [DecidableLE α] (x : α) (s : Ordset α) :
     Ordset α :=
-  ⟨insert' x s.1, insert'.valid _ s.2⟩
+  ⟨Ordnode.insert' x s.1, insert'.valid _ s.2⟩
 
 section
 

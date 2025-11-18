@@ -197,8 +197,8 @@ theorem get_ofNat' (x : ℕ) [x.AtLeastTwo] (h : (ofNat(x) : PartENat).Dom) :
     Part.get (ofNat(x) : PartENat) h = ofNat(x) :=
   get_natCast' x h
 
-nonrec theorem get_eq_iff_eq_some {a : PartENat} {ha : a.Dom} {b : ℕ} : a.get ha = b ↔ a = some b :=
-  get_eq_iff_eq_some
+theorem get_eq_iff_eq_some {a : PartENat} {ha : a.Dom} {b : ℕ} : a.get ha = b ↔ a = some b :=
+  Part.get_eq_iff_eq_some
 
 theorem get_eq_iff_eq_coe {a : PartENat} {ha : a.Dom} {b : ℕ} : a.get ha = b ↔ a = b := by
   rw [get_eq_iff_eq_some]
@@ -297,7 +297,7 @@ theorem coe_lt_iff (n : ℕ) (x : PartENat) : (n : PartENat) < x ↔ ∀ h : x.D
   simp only [lt_def, exists_prop_of_true, dom_some]
   rfl
 
-nonrec theorem eq_zero_iff {x : PartENat} : x = 0 ↔ x ≤ 0 :=
+theorem eq_zero_iff {x : PartENat} : x = 0 ↔ x ≤ 0 :=
   eq_bot_iff
 
 theorem ne_zero_iff {x : PartENat} : x ≠ 0 ↔ ⊥ < x :=
