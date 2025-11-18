@@ -72,7 +72,7 @@ theorem rel_of_sorted_cons {a : α} {l : List α} : Sorted r (a :: l) → ∀ b 
 
 theorem Sorted.cons {r : α → α → Prop} [IsTrans α r] {l : List α} {a b : α}
     (hab : r a b) (h : Sorted r (b :: l)) : Sorted r (a :: b :: l) :=
-  Pairwise.cons 
+  Pairwise.cons
     (forall_mem_cons.2 ⟨hab, fun _ hx => _root_.trans hab <| rel_of_sorted_cons h _ hx⟩) h
 
 theorem sorted_cons_cons {r : α → α → Prop} [IsTrans α r] {l : List α} {a b : α} :
