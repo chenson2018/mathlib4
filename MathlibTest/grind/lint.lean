@@ -4,6 +4,7 @@ import Mathlib
 -- If this test fails, please modify newly introduced `grind` annotations to use the
 -- `grind_pattern ... where ...` syntax to add side conditions that will prevent the run-away.
 -- See https://lean-lang.org/doc/reference/latest/The--grind--tactic/E___matching/ for details.
+#guard_msgs in
 #grind_lint check (min := 20) in module Mathlib
 
 -- (Note: the above #grind_lint take about 20s as of 2025-11-21.
