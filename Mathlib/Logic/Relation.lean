@@ -533,6 +533,15 @@ lemma reflGen_eq_self (hr : Reflexive r) : ReflGen r = r := by
 
 lemma reflexive_reflGen : Reflexive (ReflGen r) := fun _ ↦ .refl
 
+theorem symmetric_reflGen (hs : Symmetric r) : Symmetric (ReflGen r)
+  | _, _, .refl => .refl
+  | _, _, .single h => .single (hs h)
+
+theorem transitive_reflGen (ht : Transitive r) : Transitive (ReflGen r)
+  | _, _, _, .refl, h => h
+  | _, _, _, .single h, .refl => .single h
+  | _, _, _, .single h, .single h' => .single (ht h h')
+
 lemma reflGen_minimal {r' : α → α → Prop} (hr' : Reflexive r') (h : ∀ x y, r x y → r' x y) {x y : α}
     (hxy : ReflGen r x y) : r' x y := by
   simpa [reflGen_eq_self hr'] using ReflGen.mono h hxy
@@ -546,11 +555,6 @@ theorem symmGen_swap (r : α → α → Prop) : SymmGen (swap r) = SymmGen r :=
 
 theorem symmGen_swap_apply (r : α → α → Prop) : SymmGen (swap r) a b ↔ SymmGen r a b :=
   or_comm
-
-theorem reflGen_symmGen_symmetric : Symmetric (ReflGen (SymmGen r))
-  | _, _, .refl => .refl
-  | _, _, .single (.inl h) => .single (.inr h)
-  | _, _, .single (.inr h) => .single (.inl h)
 
 theorem symmGen_comm {a b : α} : SymmGen r a b ↔ SymmGen r b a :=
   comm
