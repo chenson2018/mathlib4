@@ -116,7 +116,7 @@ set_option linter.deprecated false in
 theorem compRel_of_total [Std.Total r] (a b : α) : CompRel r a b :=
   symmGen_of_total a b
 
-@[deprecated (since := "2026-01-13")] alias IsTotal.compRel := compRel_of_total
+@[deprecated (since := "2026-01-13")] alias IsTotal.compRel := symmGen_of_total
 
 end Relation
 
