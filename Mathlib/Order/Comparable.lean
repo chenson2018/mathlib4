@@ -52,55 +52,66 @@ variable {r : α → α → Prop}
 def CompRel (r : α → α → Prop) (a b : α) : Prop :=
   r a b ∨ r b a
 
-set_option linter.deprecated false
-
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_rel (since := "2026-01-25")]
 theorem CompRel.of_rel (h : r a b) : CompRel r a b :=
   SymmGen.of_rel h
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_rel_symm (since := "2026-01-25")]
 theorem CompRel.of_rel_symm (h : r b a) : CompRel r a b :=
   SymmGen.of_rel_symm h
 
+set_option linter.deprecated false in
 @[deprecated symmGen_swap (since := "2026-01-25")]
 theorem compRel_swap (r : α → α → Prop) : CompRel (swap r) = CompRel r :=
   symmGen_swap r
 
+set_option linter.deprecated false in
 @[deprecated symmGen_swap_apply (since := "2026-01-25")]
 theorem compRel_swap_apply (r : α → α → Prop) : CompRel (swap r) a b ↔ CompRel r a b :=
   symmGen_swap_apply r
 
+set_option linter.deprecated false in
 @[simp, refl, deprecated SymmGen.refl (since := "2026-01-25")]
 theorem CompRel.refl (r : α → α → Prop) [Std.Refl r] (a : α) : CompRel r a a :=
   SymmGen.refl r a
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.rfl (since := "2026-01-25")]
 theorem CompRel.rfl [Std.Refl r] : CompRel r a a := SymmGen.rfl
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.instRefl (since := "2026-01-25")]
 instance [Std.Refl r] : Std.Refl (CompRel r) :=
   SymmGen.instRefl
 
+set_option linter.deprecated false in
 @[symm, deprecated SymmGen.symm (since := "2026-01-25")]
 theorem CompRel.symm : CompRel r a b → CompRel r b a :=
   SymmGen.symm
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.instSymm (since := "2026-01-25")]
 instance : Std.Symm (CompRel r) :=
   SymmGen.instSymm
 
+set_option linter.deprecated false in
 @[deprecated symmGen_comm (since := "2026-01-25")]
 theorem compRel_comm {a b : α} : CompRel r a b ↔ CompRel r b a :=
   symmGen_comm
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.decidableRel (since := "2026-01-25")]
 instance CompRel.decidableRel [DecidableRel r] : DecidableRel (CompRel r) :=
   SymmGen.decidableRel
 
+set_option linter.deprecated false in
 @[deprecated AntisymmRel.symmGen (since := "2026-01-25")]
 theorem AntisymmRel.compRel (h : AntisymmRel r a b) : CompRel r a b :=
   AntisymmRel.symmGen h
 
+set_option linter.deprecated false in
 @[simp, deprecated symmGen_of_total (since := "2026-01-25")]
 theorem compRel_of_total [Std.Total r] (a b : α) : CompRel r a b :=
   symmGen_of_total a b
@@ -111,13 +122,13 @@ end Relation
 
 section LE
 
-set_option linter.deprecated false
-
 variable [LE α]
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_le (since := "2026-01-25")]
 theorem CompRel.of_le (h : a ≤ b) : CompRel (· ≤ ·) a b := SymmGen.of_le h
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_ge (since := "2026-01-25")]
 theorem CompRel.of_ge (h : b ≤ a) : CompRel (· ≤ ·) a b := SymmGen.of_ge h
 
@@ -128,19 +139,20 @@ end LE
 
 section Preorder
 
-set_option linter.deprecated false
-
 variable [Preorder α]
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_lt (since := "2026-01-25")]
 theorem CompRel.of_lt (h : a < b) : CompRel (· ≤ ·) a b := SymmGen.of_lt h
 
+set_option linter.deprecated false in
 @[deprecated SymmGen.of_gt (since := "2026-01-25")]
 theorem CompRel.of_gt (h : b < a) : CompRel (· ≤ ·) a b := SymmGen.of_gt h
 
 alias LT.lt.compRel := CompRel.of_lt
 alias LT.lt.compRel_symm := CompRel.of_gt
 
+set_option linter.deprecated false in
 @[trans, deprecated SymmGen.of_symmGen_of_antisymmRel (since := "2026-01-25")]
 theorem CompRel.of_compRel_of_antisymmRel
     (h₁ : CompRel (· ≤ ·) a b) (h₂ : AntisymmRel (· ≤ ·) b c) : CompRel (· ≤ ·) a c :=
@@ -148,10 +160,12 @@ theorem CompRel.of_compRel_of_antisymmRel
 
 alias CompRel.trans_antisymmRel := CompRel.of_compRel_of_antisymmRel
 
+set_option linter.deprecated false in
 @[deprecated instTransSymmGenLeAntisymmRel (since := "2026-01-25")]
 instance : @Trans α α α (CompRel (· ≤ ·)) (AntisymmRel (· ≤ ·)) (CompRel (· ≤ ·)) :=
   instTransSymmGenLeAntisymmRel
 
+set_option linter.deprecated false in
 @[trans, deprecated SymmGen.of_antisymmRel_of_symmGen (since := "2026-01-25")]
 theorem CompRel.of_antisymmRel_of_compRel
     (h₁ : AntisymmRel (· ≤ ·) a b) (h₂ : CompRel (· ≤ ·) b c) : CompRel (· ≤ ·) a c :=
@@ -159,20 +173,24 @@ theorem CompRel.of_antisymmRel_of_compRel
 
 alias AntisymmRel.trans_compRel := CompRel.of_antisymmRel_of_compRel
 
+set_option linter.deprecated false in
 @[deprecated instTransAntisymmRelLeSymmGen (since := "2026-01-25")]
 instance : @Trans α α α (AntisymmRel (· ≤ ·)) (CompRel (· ≤ ·)) (CompRel (· ≤ ·)) :=
   instTransAntisymmRelLeSymmGen
 
+set_option linter.deprecated false in
 @[deprecated AntisymmRel.symmGen_congr (since := "2026-01-25")]
 theorem AntisymmRel.compRel_congr (h₁ : AntisymmRel (· ≤ ·) a b) (h₂ : AntisymmRel (· ≤ ·) c d) :
     CompRel (· ≤ ·) a c ↔ CompRel (· ≤ ·) b d :=
   AntisymmRel.symmGen_congr h₁ h₂
 
+set_option linter.deprecated false in
 @[deprecated AntisymmRel.symmGen_congr_left (since := "2026-01-25")]
 theorem AntisymmRel.compRel_congr_left (h : AntisymmRel (· ≤ ·) a b) :
     CompRel (· ≤ ·) a c ↔ CompRel (· ≤ ·) b c :=
   AntisymmRel.symmGen_congr_left h
 
+set_option linter.deprecated false in
 @[deprecated AntisymmRel.symmGen_congr_right (since := "2026-01-25")]
 theorem AntisymmRel.compRel_congr_right (h : AntisymmRel (· ≤ ·) b c) :
     CompRel (· ≤ ·) a b ↔ CompRel (· ≤ ·) a c :=
