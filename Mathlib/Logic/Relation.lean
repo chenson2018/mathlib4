@@ -372,8 +372,8 @@ instance : Std.Symm (SymmGen r) where
 instance decidableRel [DecidableRel r] : DecidableRel (SymmGen r) :=
   fun _ _ ↦ inferInstanceAs (Decidable (_ ∨ _))
 
-theorem of_le {α : Type*} {a b : α} [LE α] (h : a ≤ b) : SymmGen (· ≤ ·) a b := .of_rel h
-theorem of_ge {α : Type*} {a b : α} [LE α] (h : b ≤ a) : SymmGen (· ≤ ·) a b := .of_rel_symm h
+theorem of_le {α : Type*} [LE α] {a b : α} (h : a ≤ b) : SymmGen (· ≤ ·) a b := .of_rel h
+theorem of_ge {α : Type*} [LE α] {a b : α} (h : b ≤ a) : SymmGen (· ≤ ·) a b := .of_rel_symm h
 
 alias _root_.LE.le.symmGen := SymmGen.of_le
 alias _root_.LE.le.symmGen_symm := SymmGen.of_ge
