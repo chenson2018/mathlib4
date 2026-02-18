@@ -505,13 +505,13 @@ some of the sets to obtain a coarser partition. -/
 noncomputable def coarserPartition (hs : IndexedPartition s) {κ : Type*} (g : ι → κ)
     (hg : g.Surjective) :
     IndexedPartition (fun k : κ => ⋃ i ∈ g ⁻¹' {k}, s i) where
-  eq_of_mem {_x _i _j} hxi hxj := by
+  eq_of_mem {x _i _j} hxi hxj := by
     obtain ⟨a, ⟨c, hc⟩, ha⟩ := hxi
     obtain ⟨b, ⟨d, hd⟩, hb⟩ := hxj
     grind =>
       instantiate [mem_iUnion]
-      have hb : _x ∈ s d
-      have ha : _x ∈ s c
+      have hb : x ∈ s d
+      have ha : x ∈ s c
       have : c = d := hs.eq_of_mem ha hb
       finish
   some k := hs.some ((singleton_nonempty k).preimage hg).some
