@@ -4,8 +4,6 @@ name: Label New Contributors
 
 on:
   pull_request_target:
-    types:
-      - opened
 
 # Limit permissions for GITHUB_TOKEN for the entire workflow
 permissions:
