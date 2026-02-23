@@ -412,15 +412,13 @@ theorem map {f : α →. β} {g : α → β → σ} (hf : Partrec f) (hg : Compu
 theorem to₂ {f : α × β →. σ} (hf : Partrec f) : Partrec₂ fun a b => f (a, b) :=
   hf.of_eq fun ⟨_, _⟩ => rfl
 
-set_option linter.flexible false in -- TODO: revisit this after #13791 is merged
 theorem nat_rec {f : α → ℕ} {g : α →. σ} {h : α → ℕ × σ →. σ} (hf : Computable f) (hg : Partrec g)
     (hh : Partrec₂ h) : Partrec fun a => (f a).rec (g a) fun y IH => IH.bind fun i => h a (y, i) :=
   (Nat.Partrec.prec' hf hg hh).of_eq fun n => by
-    rcases e : decode (α := α) n with - | a <;> simp [e]
-    induction f a with simp | succ m IH
-    rw [IH, Part.bind_map]
-    congr; funext s
-    simp [encodek]
+    rcases e : decode (α := α) n with - | a
+    · simp
+    · simp only [coe_some, PFun.coe_val, bind_some]
+      induction f a <;> simp_all
 
 nonrec theorem comp {f : β →. σ} {g : α → β} (hf : Partrec f) (hg : Computable g) :
     Partrec fun a => f (g a) :=
