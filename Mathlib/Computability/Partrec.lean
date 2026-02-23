@@ -497,7 +497,7 @@ theorem rfind {p : α → ℕ →. Bool} (hp : Partrec₂ p) : Partrec fun a => 
   (Nat.Partrec.rfind <|
         hp.map ((Primrec.dom_bool fun b => cond b 0 1).comp Primrec.snd).to₂.to_comp).of_eq
     fun n => by
-    rcases e : decode (α := α) n with - | a <;> simp [e, Nat.rfind_zero_none, map_map, map_id']
+    rcases e : decode (α := α) n <;> simp [e, Nat.rfind_zero_none, map_map, map_id']
 
 theorem rfindOpt {f : α → ℕ → Option σ} (hf : Computable₂ f) :
     Partrec fun a => Nat.rfindOpt (f a) :=
@@ -507,10 +507,9 @@ theorem nat_casesOn_right {f : α → ℕ} {g : α → σ} {h : α → ℕ →. 
     (hg : Computable g) (hh : Partrec₂ h) : Partrec fun a => (f a).casesOn (some (g a)) (h a) :=
   (nat_rec hf hg (hh.comp fst (pred.comp <| hf.comp fst)).to₂).of_eq fun a => by
     simp only [PFun.coe_val, Nat.pred_eq_sub_one]
-    cases f a with
-    | zero => simp
-    | succ n =>
-      refine ext fun b => ⟨fun H => ?_, fun H => ?_⟩
+    rcases f a with - | n
+    · simp
+    · refine ext fun b => ⟨fun H => ?_, fun H => ?_⟩
       · rcases mem_bind_iff.1 H with ⟨c, _, h₂⟩
         exact h₂
       · have : ∀ m, (Nat.rec (motive := fun _ => Part σ)
