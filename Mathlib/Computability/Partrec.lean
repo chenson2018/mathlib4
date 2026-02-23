@@ -219,11 +219,8 @@ theorem ppred : Nat.Partrec fun n => ppred n :=
       (_root_.Primrec.const 0) (_root_.Primrec.const 1)).to₂
   (of_primrec (Primrec₂.unpaired'.2 this)).rfind.of_eq fun n => by
     cases n
-    · apply eq_none_iff.2
-      simp
-    · apply eq_some_iff.2
-      simp
-      lia
+    · exact eq_none_iff.2 (by simp)
+    · exact eq_some_iff.2 (by simp; lia)
 
 end Partrec
 
