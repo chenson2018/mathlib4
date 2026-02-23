@@ -277,7 +277,7 @@ theorem const (s : σ) : Computable fun _ : α => s :=
 theorem ofOption {f : α → Option β} (hf : Computable f) : Partrec fun a => (f a : Part β) :=
   (Nat.Partrec.ppred.comp hf).of_eq fun n => by
     rcases decode (α := α) n with - | a <;> simp
-    cases (f a) <;> simp
+    cases f a <;> simp
 
 theorem to₂ {f : α × β → σ} (hf : Computable f) : Computable₂ fun a b => f (a, b) :=
   hf.of_eq fun ⟨_, _⟩ => rfl
@@ -403,7 +403,7 @@ theorem const' (s : Part σ) : Partrec fun _ : α => s :=
 protected theorem bind {f : α →. β} {g : α → β →. σ} (hf : Partrec f) (hg : Partrec₂ g) :
     Partrec fun a => (f a).bind (g a) :=
   (hg.comp (Nat.Partrec.some.pair hf)).of_eq fun n => by
-    rcases e : decode (α := α) n with - | a <;> simp [Seq.seq, e, encodek]
+    rcases e : decode (α := α) n <;> simp [Seq.seq, e, encodek]
 
 theorem map {f : α →. β} {g : α → β → σ} (hf : Partrec f) (hg : Computable₂ g) :
     Partrec fun a => (f a).map (g a) := by
