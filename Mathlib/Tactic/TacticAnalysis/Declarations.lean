@@ -12,6 +12,7 @@ public meta import Lean.Meta.Tactic.TryThis
 public import Mathlib.Tactic.ExtractGoal
 public import Mathlib.Tactic.TacticAnalysis
 public import Mathlib.Util.ParseCommand
+public import Mathlib.Tactic.GrindAttrs
 
 /-!
 # Tactic linters
